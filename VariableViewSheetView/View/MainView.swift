@@ -13,30 +13,35 @@ import SwiftUI
 // The sheet view will be able to draw all of them
 
 struct MainView: View {
-    @State private var isTabOpen: Bool = false
-    @State private var selectedTab = ListTabs.view1
+    @State private var tabSheetStates: [ListTab: Bool] = [:]
+    @State private var selectedTab: ListTab? = nil
     
     var body: some View {
-        ForEach(ListTabs.allCases, id: \.id) { tab in
+        ForEach(ListTab.allCases, id: \.id) { tab in
             Button(action: {
                 selectedTab = tab
-                isTabOpen = true
+                tabSheetStates[tab] = true
             }, label: {
                 HStack {
                     Text(tab.title)
                         .font(.title)
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                     
                     Spacer()
                     
                     Image(systemName: "chevron.right")
                         .font(.title)
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
+
                 }
+                .padding(.horizontal)
             })
-            .sheet(isPresented: $isTabOpen, content: {
-                SheetView(content: AnyView(selectedTab.tabView))
-            })
+            .sheet(isPresented: Binding(
+                get: { tabSheetStates[tab] ?? false },
+                set: { tabSheetStates[tab] = $0 }
+            )) {
+                SheetView(content: AnyView(tab.tabView))
+            }
         }
     }
 }

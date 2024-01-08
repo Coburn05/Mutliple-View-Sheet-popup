@@ -24,6 +24,7 @@ struct SheetView: View {
             Text("CLOSE")
                 .font(.title)
                 .fontWeight(.bold)
+                .foregroundColor(.primary)
         })
         
         content

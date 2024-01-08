@@ -14,6 +14,7 @@ struct View3: View {
             Text("view 3")
                 .font(.title)
                 .fontWeight(.bold)
+                .foregroundColor(.primary)
             Spacer()
         }// Vstack
     }

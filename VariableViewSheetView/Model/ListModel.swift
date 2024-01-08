@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum ListTabs: String, CaseIterable, Identifiable {
+enum ListTab: String, CaseIterable, Identifiable {
     case view1
     case view2
     case view3
@@ -18,7 +18,7 @@ enum ListTabs: String, CaseIterable, Identifiable {
     }
 }
 
-extension ListTabs {
+extension ListTab {
     var title: String {
         switch self {
         case .view1:
